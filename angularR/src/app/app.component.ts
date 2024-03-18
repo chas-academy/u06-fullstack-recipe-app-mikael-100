@@ -13,12 +13,11 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'angularR';
 
-  // isActive: boolean = false;
+
   menuValue: boolean = false;
 
 openMenu(){
   this.menuValue = !this.menuValue;
-  // this.isActive = this.menuValue;
   console.log('Menu value:', this.menuValue);
 }
 

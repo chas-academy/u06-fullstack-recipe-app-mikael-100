@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'angularR';
 
-
+// Denna styr över Hamburgermenu och gör så att den triggar cssklassen hidden när den är false vilket betyder att den inte kommer att synas.
   menuValue: boolean = false;
 
 openMenu(){

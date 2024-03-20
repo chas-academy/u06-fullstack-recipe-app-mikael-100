@@ -29,11 +29,13 @@ private httpOptions = {
   }
 
 
-  getUser2(): Observable<User[]> {
-    console.log(localStorage.getItem("token"));
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', "Bearer " ? localStorage.getItem("token"));
-    return this.http.get<User[]>(this.baseUrl+'getuser/2', this.httpOptions);
-  }
+getUser2(): Observable<User[]> {
+  console.log(localStorage.getItem("token"));
+  const token = localStorage.getItem("token") || ''; // Använd token om det finns, annars använd en tom sträng
+  this.httpOptions.headers = this.httpOptions.headers.set('Authorization', "Bearer " + token);
+  return this.http.get<User[]>(this.baseUrl+'getuser/2', this.httpOptions);
+}
+
 
   private handleError(error: HttpErrorResponse){
     if (error.status === 0){

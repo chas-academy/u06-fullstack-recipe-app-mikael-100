@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { LoginDetails } from '../interfaces/login-details';
 import { Observable, catchError, throwError } from 'rxjs';
 import { User } from '../interfaces/user';
+import { RegisterDetails } from '../interfaces/register-details';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-private baseUrl = 'http://127.0.0.1:8000/api/';
+private baseUrl = 'http://localhost:8000/api/';
   
 private httpOptions = {
     headers: new HttpHeaders({
@@ -23,6 +24,7 @@ private httpOptions = {
     this.http.post<any>(this.baseUrl+'login', loginDetails, this.httpOptions).pipe(
       catchError(this.handleError)).subscribe(result => {
         console.log(result);
+        console.log(result.token);
         localStorage.setItem("token", result.token);
       })
     
@@ -48,6 +50,20 @@ getUser2(): Observable<User[]> {
     return throwError(() => new Error('Something bad happened'));
 
   }
+
+  // Register
+
+  registerUser(registerDetails: RegisterDetails) {
+    this.http.post<any>(this.baseUrl+'register', registerDetails, this.httpOptions).pipe(
+      catchError(this.handleError)).subscribe(result => {
+        console.log(result);
+         console.log(result.token);
+        localStorage.setItem("token", result.token);
+
+      })
+  }
 }
 
-// Du kom till 1 tim på API for inloggning registrering
+// Skapa en register funktion
+
+// DU KOM TILL 08:27 på Ollie Auth, login registrering

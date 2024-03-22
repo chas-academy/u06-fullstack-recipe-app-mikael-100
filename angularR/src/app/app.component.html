@@ -45,7 +45,8 @@
       <!-- 1. Hamburgermenu: Förklaring finns i Mikael README -->
 
       <div class="flex items-center gap-6">
-        <button class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-[#87acec] hidden md:flex">Logga
+        <button class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-[#87acec] hidden md:flex"
+          (click)="getUser()">Logga
           in</button>
         <img class="w-12 text-3xl cursor-pointer md:hidden" src="../assets/bilder/menu-outline.svg" alt="hamburger"
           (click)="openMenu()">
@@ -106,6 +107,7 @@
     <!-- Svart sträck -->
     <hr class="border-b border-black w-[90%] mx-auto my-2">
   </header>
+
 
   <!-- Serchbar -->
 

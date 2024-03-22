@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './service/auth.service';
 import { LoginDetails } from './interfaces/login-details';
 import { User } from './interfaces/user';
+import { RegisterDetails } from './interfaces/register-details';
 
 @Component({
   selector: 'app-root',
@@ -29,15 +30,36 @@ openMenu(){
 // auth service Login
 
 loginDetails: LoginDetails;
-user?: User;
+
+user: User;
+
+// Register
+
+registerDetails: RegisterDetails;
 
 constructor(private auth: AuthService) {
   this.loginDetails = {
-    email:"seb@seb.se",
+    email:"seb@seb.seb",
     password:"sebsebseb"
   }
 
+  this.user = {
+    id:-1,
+    name:"",
+    email:""
+  }
+
   auth.loginUser(this.loginDetails);
+
+  // Skapa register här under!
+
+  this.registerDetails = {
+    name:"",
+    email:"", 
+    password:"", 
+    password_cornfirmation:"",
+    
+  }
 
 }
 
@@ -48,5 +70,16 @@ getUser(){
 
   })
 }
+
+
+
+
+
+
+
+// Register:
+// Skapa en ny registerdetail variabel som använder interface variabel
+// använd construktorn och gör test datan för variabeln.
+// 
 
 }

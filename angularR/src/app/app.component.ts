@@ -6,6 +6,7 @@ import { AuthService } from './service/auth.service';
 import { LoginDetails } from './interfaces/login-details';
 import { User } from './interfaces/user';
 import { RegisterDetails } from './interfaces/register-details';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ user: User;
 
 // Register
 
-registerDetails: RegisterDetails;
+// registerDetails: RegisterDetails;
 
 constructor(private auth: AuthService) {
   this.loginDetails = {
@@ -53,13 +54,13 @@ constructor(private auth: AuthService) {
 
   // Skapa register här under!
 
-  this.registerDetails = {
-    name:"",
-    email:"", 
-    password:"", 
-    password_cornfirmation:"",
+  // this.registerDetails = {
+  //   name:"",
+  //   email:"", 
+  //   password:"", 
+  //   password_cornfirmation:"",
     
-  }
+  // }
 
 }
 
@@ -73,13 +74,19 @@ getUser(){
 
 
 
-
-
-
-
 // Register:
 // Skapa en ny registerdetail variabel som använder interface variabel
 // använd construktorn och gör test datan för variabeln.
 // 
+
+// register(){
+//   this.auth.registerUser(this.registerDetails).subscribe((resultat: any) => {
+//     console.log(resultat[0]);
+//     this.user = resultat[0];
+//   })
+// }
+
+
+
 
 }

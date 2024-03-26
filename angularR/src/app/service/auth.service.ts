@@ -10,7 +10,7 @@ import { RegisterDetails } from '../interfaces/register-details';
 })
 export class AuthService {
 
-private baseUrl = 'http://localhost:8000/api/';
+private baseUrl = 'http://127.0.0.1:8000/api/';
   
 private httpOptions = {
     headers: new HttpHeaders({
@@ -20,7 +20,7 @@ private httpOptions = {
 
   constructor(private http: HttpClient) { }
 
-  loginUser(loginDetails: LoginDetails){
+  loginUser(loginDetails: Partial<LoginDetails>){
     this.http.post<any>(this.baseUrl+'login', loginDetails, this.httpOptions).pipe(
       catchError(this.handleError)).subscribe(result => {
         console.log(result);
@@ -29,6 +29,19 @@ private httpOptions = {
       })
     
   }
+
+  //   loginUser(loginForm: Partial<LoginDetails>){
+  //   this.http.post<any>(this.baseUrl+'login', loginForm, this.httpOptions).pipe(
+  //     catchError(this.handleError)).subscribe(result => {
+  //       console.log(result);
+  //       console.log(result.loginForm);
+  //       localStorage.setItem("token", result.loginForm);
+  //     })
+    
+  // }
+
+
+
 
 
 getUser2(): Observable<User[]> {
@@ -53,74 +66,37 @@ getUser2(): Observable<User[]> {
 
   // // Register
 
-  // registerUser(registerDetails: RegisterDetails){
-  //   this.http.post<any>(this.baseUrl+'register', registerDetails, this.httpOptions).pipe(
-  //     catchError(this.handleError)).subscribe(result  => {
-  //       console.log(result);
-  //        console.log(result.token);
-  //       localStorage.setItem("token", result.token);
 
-  //     })
-  // }
-
-   // Register
-
-  // registerUser(registerDetails: RegisterDetails){
-  //   this.http.post<any>(this.baseUrl+'register', registerDetails, this.httpOptions).pipe(
-  //     catchError(this.handleError)).subscribe((result: any)=> {
-  //       console.log(result);
-  //        console.log(result.token);
-  //        return result;
-  //     })
-  // }
-
-  // Register 4
-
-// registerUser(registerDetails: RegisterDetails): Observable<any> {
-//   return this.http.post<any>(this.baseUrl + 'register', registerDetails, this.httpOptions).pipe(
-//     tap((result: any) => {
-//       console.log(result);
-//       console.log(result.token);
-//     }),
-//     catchError(this.handleError)
-//   );
-// }
-
-// Register 5
-
-  registerUser(registerDetails: RegisterDetails){
-    this.http.post<any>(this.baseUrl+'register', registerDetails, this.httpOptions).pipe(
-      catchError(this.handleError)).subscribe(res  => {
-        console.log(res);
-         console.log(res.token);
-        localStorage.setItem("token", res.token);
-
-      })
-    console.log("test")
-    console.log(registerDetails)
-  }
-
-
+  
+registerUser(form: any) {
+  this.http.post<any>(this.baseUrl + 'register', form, this.httpOptions).pipe(
+    catchError(this.handleError)
+  ).subscribe(res => {
+    console.log(res);
+    console.log(res.token);
+    localStorage.setItem("token", res.token);
+  });
+  
+  console.log("test");
+  console.log(form);
 }
 
 
-// Register 3
-
-// import { Observable } from 'rxjs';
-// import { map, catchError } from 'rxjs/operators';
-
-// registerUser(registerDetails: RegisterDetails): Observable<any> {
-//   return this.http.post<any>(this.baseUrl + 'register', registerDetails, this.httpOptions).pipe(
-//     map((result: any) => {
-      // console.log(result);
-      // console.log(result.token);
-//       return result; // Returnera det omvandlade resultatet
-//     }),
-//     catchError(this.handleError)
-//   );
-// }
 
 
-// Skapa en register funktion
+//  Logout User
 
-// DU KOM TILL 08:27 på Ollie Auth, login registrering
+logoutUser(token: String | null) {
+  console.log("this is from logout " + token)
+  this.httpOptions.headers = this.httpOptions.headers.set('Authorization', "Bearer " + token);
+  this.http.post<any>(this.baseUrl + 'logout', this.httpOptions).pipe(
+    catchError(this.handleError)
+  ).subscribe(res => {
+    console.log(res);
+    console.log(res.token);
+  })
+
+}
+
+}
+

@@ -4,23 +4,31 @@ import { RegisterDetails } from '../interfaces/register-details';
 import { AuthService } from '../service/auth.service';
 import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
 
-// Register
+// FormGroup
+
+form = new FormGroup({
+  name: new FormControl(''),
+  email: new FormControl(''),
+  password: new FormControl(''),
+  password_confirmation: new FormControl('')
+})
+
+// Register 
 
 registerDetails: RegisterDetails;
-
-
 
 constructor(private auth: AuthService) {
   this.registerDetails = {
@@ -31,13 +39,12 @@ constructor(private auth: AuthService) {
     
   }
 
-
 }
 
 
 
 register(){
-  this.auth.registerUser(this.registerDetails)
+  this.auth.registerUser(this.form.value)
 }
 
 

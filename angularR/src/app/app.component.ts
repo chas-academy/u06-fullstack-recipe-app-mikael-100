@@ -86,6 +86,16 @@ getUser(){
 //   })
 // }
 
+// Logout
+
+logout()  {
+const token = localStorage.getItem('token');
+    return this.auth.logoutUser(token);
+
+  
+}
+
+
 
 
 

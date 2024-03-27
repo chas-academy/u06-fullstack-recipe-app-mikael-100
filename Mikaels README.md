@@ -17,7 +17,7 @@ För att sedan få bort menu när man klickas på rätt sida så la jag även ``
 Jag fick problem med att ul listan i navbaren syntes i mobil läge så jag fick lägga till ```hidden md:block``` För att helt dölja navbaren i mobiltläge. Denna kod i tailwind gör så att i md storlek och uppåt syns navbaren och länkarna med i allt under md så är den hidden och dåld i vyn.
 
 
-2. Form
+2. FormGroup Register
 
 För att kunna skicka form till backend så implementerade jag FormsModule, CommonModule, ReactiveFormsModule i register.components.ts sedan så fick jag göra en NEW formGroup som heter form och binda varje nyckel till ett värde från formuläret. 
 
@@ -32,6 +32,8 @@ på varje input i formuläret satte jag matchade ```formControlName="name"``` ``
 min funktion register() skickar sedan detta form vidare detta form och triggar registerUser() som finns i auth.service.
 
 registerUser i auth.service har med formets värden och gör sedan en postrequest till laravel och triggar controllern och roputen register som i sin tur lägger in användaren i databasen.
+
+Jag lade även in ```FormControl('', [Validators.required])``` på alla rader för att göra en försäkring att användaren fyller i alla fällt.
 
 
 

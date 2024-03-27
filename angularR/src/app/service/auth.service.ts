@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginDetails } from '../interfaces/login-details';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from '../interfaces/user';
 import { RegisterDetails } from '../interfaces/register-details';
 
@@ -9,6 +9,22 @@ import { RegisterDetails } from '../interfaces/register-details';
   providedIn: 'root'
 })
 export class AuthService {
+
+
+// Logged in som kollar on vaiabel är true eller false som skickas till auth
+
+inloggad = new BehaviorSubject<boolean>(false);
+
+hamtaInloggningsstatusSomObserveble(){
+  return this.inloggad.asObservable();
+}
+
+andraInloggningsStatus(value: boolean) {
+  return this.inloggad.next(value);
+}
+
+
+// Detta är webbadressen som skickar get och post till api
 
 private baseUrl = 'http://127.0.0.1:8000/api/';
   
@@ -26,6 +42,8 @@ private httpOptions = {
         console.log(result);
         console.log(result.token);
         localStorage.setItem("token", result.token);
+        this.andraInloggningsStatus(true);
+        console.log(this.andraInloggningsStatus)
       })
     
   }
@@ -81,19 +99,27 @@ registerUser(form: any) {
   console.log(form);
 }
 
-
+// getUser2(): Observable<User[]> {
+//   console.log(localStorage.getItem("token"));
+//   const token = localStorage.getItem("token") || ''; // Använd token om det finns, annars använd en tom sträng
+//   this.httpOptions.headers = this.httpOptions.headers.set('Authorization', "Bearer " + token);
+//   return this.http.get<User[]>(this.baseUrl+'getuser/2', this.httpOptions);
+// }
 
 
 //  Logout User
 
-logoutUser(token: String | null) {
-  console.log("this is from logout " + token)
+logoutUser() {
+  console.log(localStorage.getItem("token"))
+  const token = localStorage.getItem("token") || '';
   this.httpOptions.headers = this.httpOptions.headers.set('Authorization', "Bearer " + token);
-  this.http.post<any>(this.baseUrl + 'logout', this.httpOptions).pipe(
+  this.http.post<any>(this.baseUrl + 'logout', {}, this.httpOptions).pipe(
     catchError(this.handleError)
   ).subscribe(res => {
     console.log(res);
     console.log(res.token);
+    this.andraInloggningsStatus(false);
+    console.log(this.andraInloggningsStatus)
   })
 
 }

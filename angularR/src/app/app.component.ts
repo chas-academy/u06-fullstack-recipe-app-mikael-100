@@ -89,8 +89,8 @@ getUser(){
 // Logout
 
 logout()  {
-const token = localStorage.getItem('token');
-    return this.auth.logoutUser(token);
+this.getUser();
+    return this.auth.logoutUser();
 
   
 }

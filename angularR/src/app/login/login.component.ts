@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { LoginDetails } from '../interfaces/login-details';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -20,12 +20,12 @@ loginDetails: LoginDetails;
 // FormGroup
 
 loginForm = new FormGroup({
-  email: new FormControl(''),
-  password: new FormControl(''),
+  email: new FormControl('', [Validators.required, Validators.email]),
+  password: new FormControl('', [Validators.required]),
 })
 
 
-// Denna fungerar
+// // // Denna fungerar
 
   constructor(private auth: AuthService) { 
     this.loginDetails = {
@@ -60,6 +60,12 @@ loginForm = new FormGroup({
 //   password: new FormControl<string>(''),
 // })
 
+// loginForm = new FormGroup<LoginDetails>({
+//     email: new FormControl<string>(''),
+//   password: new FormControl<string>(''),
+
+// })
+  
 
 //  constructor(private auth: AuthService) { 
 //     this.loginDetails = {

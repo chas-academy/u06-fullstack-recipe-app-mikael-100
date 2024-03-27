@@ -72,6 +72,16 @@ getUser(){
   })
 }
 
+// Logout
+
+logout()  {
+// this.getUser();
+    return this.auth.logoutUser();
+}
+
+
+
+}
 
 
 // Register:
@@ -85,18 +95,3 @@ getUser(){
 //     this.user = resultat[0];
 //   })
 // }
-
-// Logout
-
-logout()  {
-this.getUser();
-    return this.auth.logoutUser();
-
-  
-}
-
-
-
-
-
-}

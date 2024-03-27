@@ -99,13 +99,6 @@ registerUser(form: any) {
   console.log(form);
 }
 
-// getUser2(): Observable<User[]> {
-//   console.log(localStorage.getItem("token"));
-//   const token = localStorage.getItem("token") || ''; // Använd token om det finns, annars använd en tom sträng
-//   this.httpOptions.headers = this.httpOptions.headers.set('Authorization', "Bearer " + token);
-//   return this.http.get<User[]>(this.baseUrl+'getuser/2', this.httpOptions);
-// }
-
 
 //  Logout User
 

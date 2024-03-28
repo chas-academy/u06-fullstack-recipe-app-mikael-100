@@ -44,6 +44,51 @@ Genom att sedan sätta en next på logout som ger värdet false till BS så komm
 
 
 
+4. Searchbar
+
+Det jag började med att göra var att utåka min searchbar och ta in 3 olika dropbdown menyer för att kunna välja mellan Mål, Diet och allergi. Detta gjorde jag med att ta in select tagg som jag har massa options innuti. Jag gjorde en översta option i vardera select till ```select disabled``` för att kunna ha en rubrik för vardera dropdown. Jag lade sedan searchbar och dessa 3 select i ett gemensamt form och satte ```(submit)="submitForm()"````på formen. I detta form så uteslöt jag formGroup och använde istället mig av ngModel. Genom att använda ngModel så använder jag mig av tvåvägsbindning så när man skriver ett ord i inputens sökfält så kommer den stringen att knytas till ngModel filter.query så värdet av denna blir ordet som skrivs in.
+
+Jag var också tvvungen att importera FormModule i Imports för att kunna använda ngModule i app.component.ts.
+
+
+![alt text](<Mikael README BILDER/image3.png>)
+
+När det kommer till dropdown så satte jag ngModel i select och genom att man väljer något option i dropdownen så kommer filter.mealtype att bli knytas till det value som vals.
+
+
+![alt text](<Mikael README BILDER/image4.png>)
+
+
+i min app.component.ts så började jag med att importera interfacet som jag gjort som heter filter. Efter det så skapade jag en funktion som heter submitform() som även finns på mitt form ```(submit)="submitForm()"``` jag använde submit för att det inte finns en knapp att clicka på utan att formen skall triggas när användaren trycker på enter.
+
+Det första som händer i min submitForm är att jag använder this för att stega in till getRecepice funktionen i RecepeService.ts. För att kunna komma åt funktionerna i denna har jag genom dependensiinjection altså genom konstructorn tagit in RecepiService till app.component. Tack vare detta kan jag stega mig fram till  dennas funktioner.
+
+Dependesiinjection: För att komma år RecipeService funktioner
+
+![alt text](<Mikael README BILDER/image6.png>)
+
+
+Med hjälp av this.recipe.getRecipes() kan jag stega mig in till denna service funktioner.
+
+![alt text](<Mikael README BILDER/image5.png>)
+
+i get recepis så tar jag nu och tar in bindningen som jag gjort med ngmodule i min app.component.html genom att använda ```this.filter.query``` jag gör detta på alla variabler jag vill skicka iväg in i den funktionen. efter detta så gör jag en subscribe på resultatet av denna http förfrågan så att jag kan logga ut detta resultat som en any array för att se vad resultatet blev i console.
+
+Nu över till min recepi.service.ts fil. Här finns getRecipes som nu tar in alla mina parametrar jag skickat och sedan bestämmer jag typen på dessa till string och sedan att de som kommer in ska vara en observeble med en any array. 
+
+Dollar tecknet heter templete literals och kallas även templete strings Och används i min kod för att skapa en URL sträng av värdet från mina variabler. Så ngModule band ju värdet som matades in eller valdes och band de till mealtype, query, diet osv nu tar jag dessa inkommande variabler och med hjälp av templete literals in dom på respektiveplats för att de tillsammans ska skapa en url som jag kan anropa API:et med. Basurl och app_key är deffinerade ovan. basen är de första i strängen och app_key behövs för att indentifiera att jag som ägare av API:et får en validerad sökning.
+
+![alt text](<Mikael README BILDER/image8.png>)
+
+
+
+
+
+
+
+
+
+
 
 
 

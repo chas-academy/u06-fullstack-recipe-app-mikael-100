@@ -60,14 +60,14 @@ constructor(private auth: AuthService, private recipe: RecipeService) {
 
 // searchBar
 
-recipes?: any[];
+// recipes?: any[];
 
-searchBar() {
-  this.recipe.getRecipes("chicken").subscribe((res: any) => {
-    console.log(res);
-    this.recipes = res
-  });
-}
+// searchBar() {
+//   this.recipe.getRecipes("chicken").subscribe((res: any) => {
+//     console.log(res);
+//     this.recipes = res
+//   });
+// }
 
 
 
@@ -89,7 +89,7 @@ logout()  {
     return this.auth.logoutUser();
 }
 
-// Searchbar
+// 4 Searchbar
 
 // Import av interface
 
@@ -100,11 +100,15 @@ filter: Filter={
   allergenes: "",
 }
 
-submitForm(){
+submitForm() {
+  this.recipe.getRecipes(this.filter.query, this.filter.mealtype, this.filter.diet, this.filter.allergenes)
+    .subscribe((resultatetFranApiAnropetSomJagSubscriberPa: any[]) => {
+      console.log(resultatetFranApiAnropetSomJagSubscriberPa);
+     
+    });
 
 
 }
-
 }
 
 

@@ -7,11 +7,13 @@ import { LoginDetails } from './interfaces/login-details';
 import { User } from './interfaces/user';
 import { RegisterDetails } from './interfaces/register-details';
 import { FormsModule, NgModel } from '@angular/forms';
+import { RecipeService } from './service/recipe.service';
+import { Filter } from './interfaces/filter';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive,RegisterComponent, CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive,RegisterComponent, CommonModule,FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -38,7 +40,7 @@ user: User;
 
 // registerDetails: RegisterDetails;
 
-constructor(private auth: AuthService) {
+constructor(private auth: AuthService, private recipe: RecipeService) {
   this.loginDetails = {
     email:"seb@seb.seb",
     password:"sebsebseb"
@@ -52,17 +54,25 @@ constructor(private auth: AuthService) {
 
   auth.loginUser(this.loginDetails);
 
-  // Skapa register här under!
 
-  // this.registerDetails = {
-  //   name:"",
-  //   email:"", 
-  //   password:"", 
-  //   password_cornfirmation:"",
-    
-  // }
 
 }
+
+// searchBar
+
+recipes?: any[];
+
+searchBar() {
+  this.recipe.getRecipes("chicken").subscribe((res: any) => {
+    console.log(res);
+    this.recipes = res
+  });
+}
+
+
+
+
+
 
 getUser(){
   this.auth.getUser2().subscribe(res => {
@@ -79,9 +89,62 @@ logout()  {
     return this.auth.logoutUser();
 }
 
+// Searchbar
+
+// Import av interface
+
+filter: Filter={
+  query: "",
+  mealtype: "",
+  diet: "",
+  allergenes: "",
+}
+
+submitForm(){
 
 
 }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Skapa register här under!
+
+  // this.registerDetails = {
+  //   name:"",
+  //   email:"", 
+  //   password:"", 
+  //   password_cornfirmation:"",
+    
+  // }
 
 
 // Register:

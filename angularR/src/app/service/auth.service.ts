@@ -11,17 +11,10 @@ import { RegisterDetails } from '../interfaces/register-details';
 export class AuthService {
 
 
-// Logged in som kollar on vaiabel är true eller false som skickas till auth
+// 3. BehaviorSubject
 
 inloggad = new BehaviorSubject<boolean>(false);
 
-hamtaInloggningsstatusSomObserveble(){
-  return this.inloggad.asObservable();
-}
-
-andraInloggningsStatus(value: boolean) {
-  return this.inloggad.next(value);
-}
 
 
 // Detta är webbadressen som skickar get och post till api
@@ -42,8 +35,7 @@ private httpOptions = {
         console.log(result);
         console.log(result.token);
         localStorage.setItem("token", result.token);
-        this.andraInloggningsStatus(true);
-        console.log(this.andraInloggningsStatus)
+        this.inloggad.next(true);
       })
     
   }
@@ -111,8 +103,7 @@ logoutUser() {
   ).subscribe(res => {
     console.log(res);
     console.log(res.token);
-    this.andraInloggningsStatus(false);
-    console.log(this.andraInloggningsStatus)
+    this.inloggad.next(false);
   })
 
 }

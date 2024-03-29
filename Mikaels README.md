@@ -81,6 +81,9 @@ Dollar tecknet heter templete literals och kallas även templete strings Och anv
 ![alt text](<Mikael README BILDER/image8.png>)
 
 
+I ut med att denna funktion för sökresultatet ligger i app komponenten som är konstant så kan jag inte göra en ngOnDestroy och göra en un subscribe på denna subscription.
+
+
 
 
 

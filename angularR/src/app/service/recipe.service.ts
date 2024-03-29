@@ -21,8 +21,7 @@ export class RecipeService {
 
   constructor(private http:HttpClient)  { }
 
-  // Dollar tecknet heter templete literals och kallas även templete strings
-  // Och används i min kod för att skapa en URL sträng av värdet från mina variabler.
+
 
 //       getRecipes(searchTerm: string): Observable<any[]> {
 //       let url = `${this.baseUrl}?query=${searchTerm}&apiKey=${this.app_key}`;

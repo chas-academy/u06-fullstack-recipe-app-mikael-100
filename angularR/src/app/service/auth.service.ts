@@ -4,6 +4,7 @@ import { LoginDetails } from '../interfaces/login-details';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from '../interfaces/user';
 import { RegisterDetails } from '../interfaces/register-details';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ private httpOptions = {
     })
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   loginUser(loginDetails: Partial<LoginDetails>){
     this.http.post<any>(this.baseUrl+'login', loginDetails, this.httpOptions).pipe(
@@ -36,6 +37,7 @@ private httpOptions = {
         console.log(result.token);
         localStorage.setItem("token", result.token);
         this.inloggad.next(true);
+        this.router.navigate([''])
       })
     
   }
@@ -74,7 +76,8 @@ getUser2(): Observable<User[]> {
 
   }
 
-  // // Register
+  // 5. Register
+
 
 
   
@@ -85,6 +88,7 @@ registerUser(form: any) {
     console.log(res);
     console.log(res.token);
     localStorage.setItem("token", res.token);
+    this.router.navigate(['/login']);
   });
   
   console.log("test");

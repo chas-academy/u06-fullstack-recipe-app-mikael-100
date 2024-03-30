@@ -85,11 +85,18 @@ I ut med att denna funktion för sökresultatet ligger i app komponenten som är
 
 
 
+5. Register
 
+För att direigera visare användaren till login efter den har regisrerat sig som användare och den begäran har gått igenom så använde jag mig av klassen Router.
+För att kunna använda mig av denna i auth.service så var jag tvungen att injecsera denna i construktorn i auth.service.
 
+![alt text](<Mikael README BILDER/image9.png>)
 
+efter att jag tagin in den classen så lade jag in denna funktion i min registerUser.
 
+![alt text](<Mikael README BILDER/image10.png>)
 
+Jag använde mig även av denna för att dirigera vidare användaren från login.
 
 
 

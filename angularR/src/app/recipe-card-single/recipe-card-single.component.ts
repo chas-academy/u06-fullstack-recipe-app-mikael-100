@@ -16,19 +16,7 @@ export class RecipeCardSingleComponent {
 
 
 
-// ngOnInit(): void {
-//   this.getRecipeInfo();
-// }
 
-// getRecipeInfo(): void {
-//   this.recipe.getRecipesInfo.subscribe({
-//     next: (result) => {
-//       console.log(result);
-//     },
-//     error: (error) => {
-//       console.error(error);
-//     }
-//   });
   
 
 

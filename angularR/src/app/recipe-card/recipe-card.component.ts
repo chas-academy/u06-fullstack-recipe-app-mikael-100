@@ -8,7 +8,7 @@ import { RecipeCard } from '../interfaces/recipe-card';
   templateUrl: './recipe-card.component.html',
   styleUrls: ['./recipe-card.component.css']
 })
-export class RecipeCardComponent implements OnInit {
+export class RecipeCardComponent {
   recipes: any[];
   recipeCard: RecipeCard;
 
@@ -25,13 +25,41 @@ export class RecipeCardComponent implements OnInit {
     };
   }
 
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.recipes = history.state.recipes;
+      this.recipes = history.state.recipes.results.map((item: any) => {
+        return {
+          id: item.id,
+          image: item.image,
+          title: item.title,
+        }
+      })
       console.log("Jarå")
       console.log(this.recipes);
+
+      
     });
   }
+
+// getRecipesAndSubscribe(query: string, mealtype: string, diet: string, allergenes: string): void {
+//   this.recipeService.getRecipes(query, mealtype, diet, allergenes)
+//     .subscribe((resultatetFranApiAnropetSomJagSubscriberPa) => {
+//       // Här kan du utföra åtgärder med resultatet från API-anropet
+//       console.log("Resultat från API-anropet:", resultatetFranApiAnropetSomJagSubscriberPa);
+
+//       this.recipes = resultatetFranApiAnropetSomJagSubscriberPa.results.map((item: any) => {
+//         return {
+//           id: item.id,
+//           image: item.image,
+//           title: item.title
+//         };
+//       });
+//     });
+// }
+
+
+
 
   recipeCardSingle(id: number): void {
     this.recipeService.getRecipesInfo(id.toString()).subscribe(resultatFranAPI => {

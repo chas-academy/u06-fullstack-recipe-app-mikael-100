@@ -124,7 +124,7 @@
     <div class="flex justify-center items-center py-4 mb-8">
       <select id="dropdown1" name="dropdown1" [(ngModel)]="filter.mealtype" dir="ltr"
         class="border border-black rounded-full p-2 mr-4 text-center">
-        <option value="" selected disabled>Mål</option>
+        <option value="">Mål</option>
         <option value="main course">Huvudrätt</option>
         <option value="side dish">Tillbehör</option>
         <option value="dessert">Efterrätt</option>
@@ -143,7 +143,7 @@
 
       <select id="dropdown2" name="dropdown2" [(ngModel)]="filter.diet" dir="ltr"
         class="border border-black rounded-full p-2 mr-4 text-center">
-        <option value="" selected disabled>Diet</option>
+        <option value="">Diet</option>
         <option value="Gluten Free">Glutenfri</option>
         <option value="Ketogenic">Ketogen</option>
         <option value="Vegetarian">Vegetarisk</option>
@@ -159,7 +159,7 @@
 
       <select id="dropdown3" name="dropdown3" [(ngModel)]="filter.allergenes" dir="ltr"
         class="border border-black rounded-full p-2 text-center">
-        <option value="" selected disabled>Allergi</option>
+        <option value="">Allergi</option>
         <option value="Dairy">Mjölk</option>
         <option value="Egg">Ägg</option>
         <option value="Gluten">Gluten</option>
@@ -180,6 +180,36 @@
   </form>
 
 
+  <!-- 6. Single Recipe -->
+
+  <!-- RecipiCard -->
+
+  <div class="flex justify-center items-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center items-center py-8">
+      @for (recipes of recipes; track recipes) {
+      <a (click)="recipeCardSingle(recipes.id)"
+        class="px-4 py-2 rounded-md transition-transform transform hover:scale-105">
+
+        <div class="flex justify-center items-center">
+
+          <div
+            class="bg-white bg-opacity-90 border-black shadow-lg w-full sm:w-3/4 p-2 rounded-lg flex flex-col items-center space-y-4">
+
+
+
+            <img src="{{ recipes.image }}" alt="" class="w-full h-4/5 object-cover">
+            <h1>{{ recipes.title }}</h1>
+            <!-- <p>{{ recipe.nutrition.nutrients }}</p> -->
+
+
+          </div>
+
+        </div>
+      </a>
+      }
+
+    </div>
+  </div>
 
 
   <!-- Gör Footer -->

@@ -101,10 +101,14 @@ Jag använde mig även av denna för att dirigera vidare användaren från login
 
 
 
+6. Single Recipe
+
+I min app.component så lade jag in en click funktion som heter ```recipeCardSingle(recipes.id)``` denna funktion har redipe.id inom sig. I ut med att den ligger inom en a tagg som i sig ligger inom en for loop som när api hittar reciept efter sökning kommer varje knapp och a tagg att ha recept id i sig när man klickar på denna funktion.
+
+I min app komponent finns denna funktion som är kopplad till klicket. Denna funktion tar in id som ett nummer sedan så stegar den sig men hjälp av this in i recipe service och triggar getRecipiesInfo och sätter in id i den funktionen och gör om det till string. Jag har sedan en subscribe på denna funktion för att kunna se resultatet och kunna göra en console log på det för att se om det fungerar. 
 
 
-
-
+![alt text](<Mikael README BILDER/image11.png>)
 
 
 <!-- TO DO -->

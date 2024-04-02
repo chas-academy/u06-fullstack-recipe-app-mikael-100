@@ -6,6 +6,7 @@ import { MinListaComponent } from './min-lista/min-lista.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { authguardGuard } from './guards/authguard.guard';
+import { RecipeCardSingleComponent } from './recipe-card-single/recipe-card-single.component';
 
 export const routes: Routes = [
     {path: '', component: StartsidaComponent},
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path: 'min-lista', component: MinListaComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'recipe-card', component: RecipeCardComponent, canActivate: [authguardGuard] },
+    {path: 'recipe-card-single', component: RecipeCardSingleComponent},
 
 ];

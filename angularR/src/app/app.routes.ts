@@ -17,5 +17,6 @@ export const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'recipe-card', component: RecipeCardComponent, canActivate: [authguardGuard] },
     {path: 'recipe-card-single', component: RecipeCardSingleComponent},
+    {path: 'recipe-card', component: RecipeCardComponent},
 
 ];

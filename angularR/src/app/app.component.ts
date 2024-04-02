@@ -43,7 +43,7 @@ user: User;
 
 // RecipeCard
 
-recipeCard: RecipeCard;
+// recipeCard: RecipeCard;
 
 // Register
 
@@ -69,11 +69,11 @@ constructor(private auth: AuthService, private recipe: RecipeService, private ro
 
   // RecipeCard
 
-  this.recipeCard = {
-     id: 0,
-  image: "",
-  title: "", 
-  }
+  // this.recipeCard = {
+  //    id: 0,
+  // image: "",
+  // title: "", 
+  // }
 
 
 
@@ -124,31 +124,44 @@ filter: Filter={
 
 // Denna är när du klickat i val och skrivit i namn på mat i searchbar
 
+// submitForm() {
+//   this.recipe.getRecipes(this.filter.query, this.filter.mealtype, this.filter.diet, this.filter.allergenes)
+//     .subscribe((resultatetFranApiAnropetSomJagSubscriberPa) => {
+//       console.log(resultatetFranApiAnropetSomJagSubscriberPa);
+      
+//       this.recipes = resultatetFranApiAnropetSomJagSubscriberPa.results.map((item: any) => {
+//         return {
+//           id: item.id,
+//           image: item.image,
+//           title: item.title,
+//         }
+//       })
+//     });
+// }
+
+
+
 submitForm() {
   this.recipe.getRecipes(this.filter.query, this.filter.mealtype, this.filter.diet, this.filter.allergenes)
     .subscribe((resultatetFranApiAnropetSomJagSubscriberPa) => {
       console.log(resultatetFranApiAnropetSomJagSubscriberPa);
-      
-      this.recipes = resultatetFranApiAnropetSomJagSubscriberPa.results.map((item: any) => {
-        return {
-          id: item.id,
-          image: item.image,
-          title: item.title,
-        }
+      this.recipes = resultatetFranApiAnropetSomJagSubscriberPa;
+      this.router.navigate(['/recipe-card'], { state: { recipes: this.recipes } });
+
       })
-    });
-}
+    };
+
 
 
 // Denna är för att klicka in sig på ett specifikt recept
 
-recipeCardSingle(id: number): void {
-this.recipe.getRecipesInfo(id.toString()).subscribe((resultatFranAPI) => {
-  console.log(resultatFranAPI);
-this.router.navigate(['recipe-card-single', { id: id }]);
-})
+// recipeCardSingle(id: number): void {
+// this.recipe.getRecipesInfo(id.toString()).subscribe((resultatFranAPI) => {
+//   console.log(resultatFranAPI);
+// this.router.navigate(['recipe-card-single', { id: id }]);
+// })
 
-}
+// }
 }
 
 

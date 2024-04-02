@@ -1,19 +1,25 @@
+<h1>RESSSSSSSSSSSSSSSSSS</h1>
+
 <div class="flex justify-center items-center">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center items-center py-8">
-        @for (recipe of recipe.results; track recipe) {
-        <div class="flex justify-center items-center">
+        @for (recipes of recipes; track recipes) {
+        <a (click)="recipeCardSingle(recipes.id)"
+            class="px-4 py-2 rounded-md transition-transform transform hover:scale-105">
 
-            <div
-                class="bg-white bg-opacity-90 border-black shadow-lg w-full sm:w-3/4 p-2 rounded-lg flex flex-col items-center space-y-4">
+            <div class="flex justify-center items-center">
+
+                <div
+                    class="bg-white bg-opacity-90 border-black shadow-lg w-full sm:w-3/4 p-2 rounded-lg flex flex-col items-center space-y-4">
 
 
 
-                <img src="{{ recipe.image }}" alt="" class="w-full h-4/5 object-cover">
-                <h1>{{ recipe.title }}</h1>
-                <p>{{ recipe.nutrition.nutrients }}</p>
+                    <img src="{{ recipes.image }}" alt="" class="w-full h-4/5 object-cover">
+                    <h1>{{ recipes.title }}</h1>
+
+                </div>
+
             </div>
-        </div>
-
+        </a>
         }
 
     </div>

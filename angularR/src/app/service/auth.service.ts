@@ -42,15 +42,7 @@ private httpOptions = {
     
   }
 
-  //   loginUser(loginForm: Partial<LoginDetails>){
-  //   this.http.post<any>(this.baseUrl+'login', loginForm, this.httpOptions).pipe(
-  //     catchError(this.handleError)).subscribe(result => {
-  //       console.log(result);
-  //       console.log(result.loginForm);
-  //       localStorage.setItem("token", result.loginForm);
-  //     })
-    
-  // }
+
 
 
 
@@ -108,6 +100,7 @@ logoutUser() {
     console.log(res);
     console.log(res.token);
     this.inloggad.next(false);
+    this.router.navigate([""]);
   })
 
 }

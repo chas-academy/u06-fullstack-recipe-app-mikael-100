@@ -128,8 +128,10 @@ Arrayen deffineras i början av koden som ```recipes: any[];``` för att den ska
 
 
 
+7. Gömma Länkar i Navbar och Hamburgermenu
 
+Jag gjorde tidigare en behavior subject i auth.service som jag nu valde att subscriba på i app component. För att kunna göra detta så injecerade jag AuthService i construktorn och sedan så använde jag mig utav this för att komma åt authservice och sedan variabeln inloggas och subscriba på den. Efter det så knyter jag inloggad som är en boolean till this.arHenInLoggad. Denna variabel är deklarerad ovanför construktorn som i default är false.
 
-
+Efter detta så använder jag mig av ```@for(arHenInLoggad){}``` i min html och använder ett utroppstecken om det är false och personen inte är inloggad ```@for(!arHenInLoggad){}``` och då betyder det att dessa inte visas för användaren. Jag sätter de andra värdena i navbar och menu utan utropstecken när användaren är inloggad och då kan du se länkarna.
 
 

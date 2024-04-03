@@ -40,18 +40,18 @@ loginDetails: LoginDetails;
 
 user: User;
 
+// 7. Gömma Länkar i Navbar och Hamburgermenu
 
-// RecipeCard
+arHenInloggad: boolean = false; 
 
-// recipeCard: RecipeCard;
-
-// Register
 
 // registerDetails: RegisterDetails;
 
 constructor(private auth: AuthService, private recipe: RecipeService, private router: Router) {
-  // this.recipes = []
 
+this.auth.inloggad.subscribe((inloggad: boolean) => {
+  this.arHenInloggad = inloggad;
+})
 
   this.loginDetails = {
     email:"seb@seb.seb",
@@ -67,28 +67,11 @@ constructor(private auth: AuthService, private recipe: RecipeService, private ro
   auth.loginUser(this.loginDetails);
 
 
-  // RecipeCard
-
-  // this.recipeCard = {
-  //    id: 0,
-  // image: "",
-  // title: "", 
-  // }
-
+ 
 
 
 }
 
-// searchBar
-
-// recipes?: any[];
-
-// searchBar() {
-//   this.recipe.getRecipes("chicken").subscribe((res: any) => {
-//     console.log(res);
-//     this.recipes = res
-//   });
-// }
 
 
 
@@ -106,21 +89,8 @@ getUser(){
 // Logout
 
 logout()  {
-// this.getUser();
     return this.auth.logoutUser();
 }
-
-// 4 Searchbar
-
-// Import av interface
-
-// filter: Filter={
-//   query: "",
-//   mealtype: "",
-//   diet: "",
-//   allergenes: "",
-// }
-
 
 
 

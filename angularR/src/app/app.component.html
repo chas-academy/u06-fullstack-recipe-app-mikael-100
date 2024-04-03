@@ -20,19 +20,22 @@
       <div
         class="md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[100%] md:w-auto w-full flex items-center px-5 hidden md:block">
         <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-          <li routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
+          <!-- <li routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
             <a class="hover:text-gray-500" href="#">Min Lista</a>
-          </li>
-
+          </li> -->
+          @if(arHenInloggad){
           <li routerLink="/recipe-card" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
-            <a class="hover:text-gray-500">Recept</a>
+            <a class="hover:text-gray-500">Sök Recept</a>
           </li>
-          <li routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
+          }
+          <!-- <li routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
             <a class="hover:text-gray-500">Min Lista</a>
-          </li>
+          </li> -->
+          <!-- @if(!arHenInloggad){
           <li routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
             <a class="hover:text-gray-500">Registrera</a>
           </li>
+          } -->
         </ul>
       </div>
 
@@ -45,12 +48,20 @@
       <!-- 1. Hamburgermenu: Förklaring finns i Mikael README -->
 
       <div class="flex items-center gap-6">
+        @if(!arHenInloggad){
         <button class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-[#87acec] hidden md:flex"
-          (click)="getUser()">Logga
+          (click)="getUser()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Logga
           in</button>
+        }
+        @if(arHenInloggad){
+        <button class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-[#87acec] hidden md:flex"
+          (click)="logout()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Logga
+          ut</button>
+        }
         <img class="w-12 text-3xl cursor-pointer md:hidden" src="../assets/bilder/menu-outline.svg" alt="hamburger"
           (click)="openMenu()">
       </div>
+
       <!-- <hr class="border-b border-black w-[90%] mx-auto my-2"> -->
     </nav>
 
@@ -60,38 +71,45 @@
       [ngClass]="{ 'hidden': !menuValue}" [class.mobile_menu]="menuValue">
 
       <ul class="flex flex-col gap-4">
-        <li>
+        <!-- <li>
           <a routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page"
             class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Min Lista</a>
-        </li>
-        <hr class="border-t border-gray-300">
-        <li>
+        </li> -->
+        <!-- <hr class="border-t border-gray-300"> -->
+        <!-- <li>
           <a routerLink="/startsida" routerLinkActive="active" ariaCurrentWhenActive="page"
             class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Konto</a>
-        </li>
-        <hr class="border-t border-gray-300">
-        <li>
-          <a routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Min Lista</a>
-        </li>
-        <hr class="border-t border-gray-300">
-        <li>
-          <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Login</a>
-        </li>
-        <hr class="border-t border-gray-300">
-        <li>
+        </li> -->
+
+
+        <!-- <li>
           <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page"
             class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Registrera</a>
         </li>
+        <hr class="border-t border-gray-300"> -->
+
+        @if(!arHenInloggad){
         <li>
           <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"
             class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Logga In</a>
         </li>
+        <hr class="border-t border-gray-300">
+        }
+        @if(arHenInloggad){
+        <hr class="border-t border-gray-300">
+        <li>
+          <a routerLink="/recipe-card" routerLinkActive="active" ariaCurrentWhenActive="page"
+            class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Sök Recept</a>
+        </li>
+
+        <hr class="border-t border-gray-300">
         <li>
           <a routerLink="/logout" routerLinkActive="active" ariaCurrentWhenActive="page"
             class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()" (click)="logout()">Logga Ut</a>
         </li>
+        <hr class="border-t border-gray-300">
+        }
+
 
       </ul>
     </div>

@@ -11,6 +11,7 @@ import { RecipeService } from './service/recipe.service';
 import { Filter } from './interfaces/filter';
 import { RecipeCard } from './interfaces/recipe-card';
 import { Recipe } from './interfaces/recipe';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,8 @@ export class AppComponent {
   title = 'angularR';
 
   recipes: any[];
+  private recepiesTest = new BehaviorSubject<any[]>([]);
+  recipesTest$ = this.recepiesTest.asObservable();
 
 // Denna styr över Hamburgermenu och gör så att den triggar cssklassen hidden när den är false vilket betyder att den inte kommer att synas.
   menuValue: boolean = false;
@@ -146,7 +149,15 @@ submitForm() {
     .subscribe((resultatetFranApiAnropetSomJagSubscriberPa) => {
       console.log(resultatetFranApiAnropetSomJagSubscriberPa);
       this.recipes = resultatetFranApiAnropetSomJagSubscriberPa;
-      this.router.navigate(['/recipe-card'], { state: { recipes: this.recipes } });
+      this.recepiesTest = resultatetFranApiAnropetSomJagSubscriberPa;
+
+     
+
+ this.recipe.setRecipes(resultatetFranApiAnropetSomJagSubscriberPa);
+
+      // this.router.navigate(['/recipe-card'], { state: { recipes: this.recipes } });
+            this.router.navigate(['/recipe-card']);
+
 
       })
     };

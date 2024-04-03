@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,15 @@ export class RecipeService {
 
   }
 
+  private recipesSubject = new BehaviorSubject<any[]>([]);
+  recipes$ = this.recipesSubject.asObservable();
+
+
   constructor(private http:HttpClient)  { }
 
+setRecipes(recipes: any[]): void {
+    this.recipesSubject.next(recipes);
+  }
 
 
 // Sökning efter recept från Searchbar
@@ -34,6 +41,7 @@ export class RecipeService {
       let url = `${this.baseUrl}?query=${query}&mealtype=${mealtype}&diet=${diet}&mallergenes=${allergenes}&apiKey=${this.app_key}`;
       console.log(url);
        return this.http.get<any>(url, this.httpOptions);
+       
 }
 
 

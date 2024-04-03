@@ -39,9 +39,9 @@ export class RecipeService {
 
 // Sökning efter ID för att kunna visa enskillt recept
 
-getRecipesInfo(id: string): Observable<any> {
+getRecipesInfo(id: string): Observable<any[]> {
   let url = `${this.baseUrl2}/${id}/information?apiKey=${this.app_key}`
-  return this.http.get<any>(url, this.httpOptions);
+  return this.http.get<any[]>(url, this.httpOptions);
   
 }
 

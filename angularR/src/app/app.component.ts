@@ -22,7 +22,7 @@ import { Recipe } from './interfaces/recipe';
 export class AppComponent {
   title = 'angularR';
 
-  recipes: any[];
+  // recipes: any[];
 
 // Denna styr över Hamburgermenu och gör så att den triggar cssklassen hidden när den är false vilket betyder att den inte kommer att synas.
   menuValue: boolean = false;
@@ -43,14 +43,14 @@ user: User;
 
 // RecipeCard
 
-recipeCard: RecipeCard;
+// recipeCard: RecipeCard;
 
 // Register
 
 // registerDetails: RegisterDetails;
 
 constructor(private auth: AuthService, private recipe: RecipeService, private router: Router) {
-  this.recipes = []
+  // this.recipes = []
 
 
   this.loginDetails = {
@@ -69,11 +69,11 @@ constructor(private auth: AuthService, private recipe: RecipeService, private ro
 
   // RecipeCard
 
-  this.recipeCard = {
-     id: 0,
-  image: "",
-  title: "", 
-  }
+  // this.recipeCard = {
+  //    id: 0,
+  // image: "",
+  // title: "", 
+  // }
 
 
 
@@ -114,41 +114,16 @@ logout()  {
 
 // Import av interface
 
-filter: Filter={
-  query: "",
-  mealtype: "",
-  diet: "",
-  allergenes: "",
-}
+// filter: Filter={
+//   query: "",
+//   mealtype: "",
+//   diet: "",
+//   allergenes: "",
+// }
 
 
-// Denna är när du klickat i val och skrivit i namn på mat i searchbar
-
-submitForm() {
-  this.recipe.getRecipes(this.filter.query, this.filter.mealtype, this.filter.diet, this.filter.allergenes)
-    .subscribe((resultatetFranApiAnropetSomJagSubscriberPa) => {
-      console.log(resultatetFranApiAnropetSomJagSubscriberPa);
-      
-      this.recipes = resultatetFranApiAnropetSomJagSubscriberPa.results.map((item: any) => {
-        return {
-          id: item.id,
-          image: item.image,
-          title: item.title,
-        }
-      })
-    });
-}
 
 
-// Denna är för att klicka in sig på ett specifikt recept
-
-recipeCardSingle(id: number): void {
-this.recipe.getRecipesInfo(id.toString()).subscribe((resultatFranAPI) => {
-  console.log(resultatFranAPI);
-this.router.navigate(['recipe-card-single', { id: id }]);
-})
-
-}
 }
 
 

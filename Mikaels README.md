@@ -46,7 +46,7 @@ Genom att sedan sätta en next på logout som ger värdet false till BS så komm
 
 4. Searchbar
 
-Det jag började med att göra var att utåka min searchbar och ta in 3 olika dropbdown menyer för att kunna välja mellan Mål, Diet och allergi. Detta gjorde jag med att ta in select tagg som jag har massa options innuti. Jag gjorde en översta option i vardera select till ```select disabled``` för att kunna ha en rubrik för vardera dropdown. Jag lade sedan searchbar och dessa 3 select i ett gemensamt form och satte ```(submit)="submitForm()"````på formen. I detta form så uteslöt jag formGroup och använde istället mig av ngModel. Genom att använda ngModel så använder jag mig av tvåvägsbindning så när man skriver ett ord i inputens sökfält så kommer den stringen att knytas till ngModel filter.query så värdet av denna blir ordet som skrivs in.
+Det jag började med att göra var att utöka min searchbar och ta in 3 olika dropbdown menyer för att kunna välja mellan Mål, Diet och allergi. Detta gjorde jag med att ta in select tagg som jag har massa options innuti. Jag gjorde en översta option i vardera select till ```select disabled``` för att kunna ha en rubrik för vardera dropdown. Jag lade sedan searchbar och dessa 3 select i ett gemensamt form och satte ```(submit)="submitForm()"````på formen. I detta form så uteslöt jag formGroup och använde istället mig av ngModel. Genom att använda ngModel så använder jag mig av tvåvägsbindning så när man skriver ett ord i inputens sökfält så kommer den stringen att knytas till ngModel filter.query så värdet av denna blir ordet som skrivs in.
 
 Jag var också tvvungen att importera FormModule i Imports för att kunna använda ngModule i app.component.ts.
 
@@ -59,7 +59,7 @@ När det kommer till dropdown så satte jag ngModel i select och genom att man v
 ![alt text](<Mikael README BILDER/image4.png>)
 
 
-i min app.component.ts så började jag med att importera interfacet som jag gjort som heter filter. Efter det så skapade jag en funktion som heter submitform() som även finns på mitt form ```(submit)="submitForm()"``` jag använde submit för att det inte finns en knapp att clicka på utan att formen skall triggas när användaren trycker på enter.
+i min recipe-card.component.ts så började jag med att importera interfacet som jag gjort som heter filter. Efter det så skapade jag en funktion som heter submitform() som även finns på mitt form ```(submit)="submitForm()"``` jag använde submit för att det inte finns en knapp att clicka på utan att formen skall triggas när användaren trycker på enter.
 
 Det första som händer i min submitForm är att jag använder this för att stega in till getRecepice funktionen i RecepeService.ts. För att kunna komma åt funktionerna i denna har jag genom dependensiinjection altså genom konstructorn tagit in RecepiService till app.component. Tack vare detta kan jag stega mig fram till  dennas funktioner.
 
@@ -72,7 +72,17 @@ Med hjälp av this.recipe.getRecipes() kan jag stega mig in till denna service f
 
 ![alt text](<Mikael README BILDER/image5.png>)
 
-i get recepis så tar jag nu och tar in bindningen som jag gjort med ngmodule i min app.component.html genom att använda ```this.filter.query``` jag gör detta på alla variabler jag vill skicka iväg in i den funktionen. efter detta så gör jag en subscribe på resultatet av denna http förfrågan så att jag kan logga ut detta resultat som en any array för att se vad resultatet blev i console.
+För att säkerställa typerna för min förfrågan till api har jag importerat ett interface som heter filter. Detta interface har alla sökparametrar och bestämda typer för dom. Detta säkerställer förfrågan till apiet. 
+
+i get recepis så tar jag nu och tar in bindningen som jag gjort med ngmodule i min app.component.html genom att använda ```this.filter.query``` jag gör detta på alla variabler. Genom att skriva ```[(ngModel)]="filter.query"``` 
+i min html binder jag de användaren skriver in till interfacer filter i min ts fil. När jag sedan vill skicka iväg dessa värden i submitform använder jag mig av ````this.filter.query``` som då syftar till värdet i htmlet som har skrivits in och bundits till the interfacet ```this.filter.query``` vars typ är bestämd i interfacet som jag vill skicka med i submitform
+
+![alt text](<Mikael README BILDER/image12.png>)
+
+
+ efter detta så gör jag en subscribe på resultatet av denna http förfrågan så att jag kan logga ut detta resultat som en any array för att se vad resultatet blev i console.
+
+
 
 Nu över till min recepi.service.ts fil. Här finns getRecipes som nu tar in alla mina parametrar jag skickat och sedan bestämmer jag typen på dessa till string och sedan att de som kommer in ska vara en observeble med en any array. 
 
@@ -81,7 +91,6 @@ Dollar tecknet heter templete literals och kallas även templete strings Och anv
 ![alt text](<Mikael README BILDER/image8.png>)
 
 
-I ut med att denna funktion för sökresultatet ligger i app komponenten som är konstant så kan jag inte göra en ngOnDestroy och göra en un subscribe på denna subscription.
 
 
 
@@ -103,20 +112,24 @@ Jag använde mig även av denna för att dirigera vidare användaren från login
 
 6. Single Recipe
 
-I min app.component så lade jag in en click funktion som heter ```recipeCardSingle(recipes.id)``` denna funktion har redipe.id inom sig. I ut med att den ligger inom en a tagg som i sig ligger inom en for loop som när api hittar reciept efter sökning kommer varje knapp och a tagg att ha recept id i sig när man klickar på denna funktion.
+I min recipe-card.component så lade jag in en click funktion som heter ```recipeCardSingle(recipes.id)``` denna funktion har recipes.id inom sig. I ut med att den ligger inom en a tagg som i sig ligger inom en for loop som när api hittar reciept efter sökning kommer varje knapp och a tagg att ha recept id i sig när man klickar på denna funktion.
 
-I min app komponent finns denna funktion som är kopplad till klicket. Denna funktion tar in id som ett nummer sedan så stegar den sig men hjälp av this in i recipe service och triggar getRecipiesInfo och sätter in id i den funktionen och gör om det till string. Jag har sedan en subscribe på denna funktion för att kunna se resultatet och kunna göra en console log på det för att se om det fungerar. 
+I min recipe-card.component.ts finns denna funktion som är kopplad till klicket som heter ```recipeCardSingle()``` denna funktion tar in id som typ numer och har defenitionen viod för att den inte returnerar något värde. i denna funktion använder jag mig av Router classen som jag har injeserat i construktorn. Jag använder mig av denna för att kunna byta sida när en användare triggar funktionen och skickar med id från receptet till routen.
+
+För att kunna fånga upp id var jag tvungen att använda mig av ActivatedRoute som jag injeserade i construktorn sedan använde jag mig av snapshot och paramMap och get för att fånga upp värdet av parameter id som skickas i url:en ```this.route.snapshot.paramMap.get('id');``` 
+
+Jag gör en if check på idFranRecipeComponent och kontrollerar så den inte är null. Detta gör jag för att undvika felaktiheter i koden om värdet skulle vara null. efter det så har jag en console.log som visar stringen för att kontrollera så något värde kommer med och så jag kunde så vad det var. Jag injeserad recipeservice i konstruktor och stegar sedan in i recipeservice med hjälp av this.recipe och sedan till funktionen ```getRecipesInfo(idFranRecipeComponent).subscribe((resultatFranApi))``` i den funktionen sätter jag sedan in variabel jag fångat upp skickar in den i den funktionen som är ett API anrop i recipe.service.ts jag subscribar på resultatet från denna funktion och console loggar ut det. När jag fått resultatet så använde jag mig at arrayen recipes genom att skriva this.recepis och sedan lägga in resultatet i den som en array. Jag gjorde efter de en console logg för att se hela resultatet.
+
+Arrayen deffineras i början av koden som ```recipes: any[];``` för att den ska kunna innehålla olika värden. Den läggs sedan in i construktorn för att initialiseras när komponenten skapas för att säkerställa att komponenten hittar arrayen.
 
 
-![alt text](<Mikael README BILDER/image11.png>)
+![alt text](<Mikael README BILDER/image13.png>)
 
 
-<!-- TO DO -->
 
-gör om din mall av recipe till en interface som du tar in
 
-gör även interface av:
 
-Form
 
-Recipe
+
+
+

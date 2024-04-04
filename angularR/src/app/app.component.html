@@ -20,22 +20,13 @@
       <div
         class="md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[100%] md:w-auto w-full flex items-center px-5 hidden md:block">
         <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-          <!-- <li routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
-            <a class="hover:text-gray-500" href="#">Min Lista</a>
-          </li> -->
           @if(arHenInloggad){
           <li routerLink="/recipe-card" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
             <a class="hover:text-gray-500">Sök Recept</a>
           </li>
           }
-          <!-- <li routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
-            <a class="hover:text-gray-500">Min Lista</a>
-          </li> -->
-          <!-- @if(!arHenInloggad){
-          <li routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page" class="hidden md:flex">
-            <a class="hover:text-gray-500">Registrera</a>
-          </li>
-          } -->
+
+
         </ul>
       </div>
 
@@ -67,26 +58,10 @@
 
     <!-- Hamburger ul -->
 
-    <div class="md:hidden static absolute bg-gray-200 min-h-[60vh] left-0 top-20px w-full px-15"
+    <div class="md:hidden static absolute bg-gray-200 min-h-[60vh] left-0 top-20px w-full px-15 z-50"
       [ngClass]="{ 'hidden': !menuValue}" [class.mobile_menu]="menuValue">
 
       <ul class="flex flex-col gap-4">
-        <!-- <li>
-          <a routerLink="/min-lista" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Min Lista</a>
-        </li> -->
-        <!-- <hr class="border-t border-gray-300"> -->
-        <!-- <li>
-          <a routerLink="/startsida" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Konto</a>
-        </li> -->
-
-
-        <!-- <li>
-          <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="block py-2 px-4 hover:text-gray-500" (click)="openMenu()">Registrera</a>
-        </li>
-        <hr class="border-t border-gray-300"> -->
 
         @if(!arHenInloggad){
         <li>
@@ -125,6 +100,7 @@
     <!-- Svart sträck -->
     <hr class="border-b border-black w-[90%] mx-auto my-2">
   </header>
+
 
 
   <router-outlet></router-outlet>

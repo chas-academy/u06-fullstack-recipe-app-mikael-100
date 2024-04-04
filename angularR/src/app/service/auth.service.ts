@@ -36,6 +36,8 @@ private httpOptions = {
         console.log(result);
         console.log(result.token);
         localStorage.setItem("token", result.token);
+        localStorage.setItem("name", result.user.name);
+
         this.inloggad.next(true);
         this.router.navigate([''])
       })
@@ -88,7 +90,7 @@ registerUser(form: any) {
 }
 
 
-//  Logout User
+//  Logout User 
 
 logoutUser() {
   console.log(localStorage.getItem("token"))

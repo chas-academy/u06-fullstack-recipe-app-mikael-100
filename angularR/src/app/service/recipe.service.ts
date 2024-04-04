@@ -7,9 +7,6 @@ import { Observable, tap } from 'rxjs';
 })
 export class RecipeService {
 
-    // private baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=ed85c714123840378a2b67607583fb44';
-
-    // private baseUrl2 = 'https://api.spoonacular.com/recipes/637876/information?apiKey=ed85c714123840378a2b67607583fb44';
 
 
   private baseUrl2 = 'https://api.spoonacular.com/recipes';
@@ -39,9 +36,9 @@ export class RecipeService {
 
 // Sökning efter ID för att kunna visa enskillt recept
 
-getRecipesInfo(id: string): Observable<any[]> {
+getRecipesInfo(id: string): Observable<any> {
   let url = `${this.baseUrl2}/${id}/information?apiKey=${this.app_key}`
-  return this.http.get<any[]>(url, this.httpOptions);
+  return this.http.get<any>(url, this.httpOptions);
   
 }
 

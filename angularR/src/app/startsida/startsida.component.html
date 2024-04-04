@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="startsida.css">
+<div class="flex items-center justify-center">
+    @if(arHenInloggad){
+    <h1>Välkommen, {{ name }}</h1>
+    }
+</div>
 
 <article class="flex flex-col justify-center items-center">
     <div class="xl:w-3/5 xl:h-4/5 lg:w-3/5 md:w-2/3 sm:w-4/5 w-90 text-center">
 
-        <div class="rounded-full bg-pink-500 p-12">
+        <div class="rounded-full bg-pink-500 p-12 skew-y-3 mt-7">
             <h1 class="nanum-brush text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white">Schysst käk i
                 magen gör
                 dig

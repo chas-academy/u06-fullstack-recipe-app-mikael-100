@@ -71,11 +71,3 @@ this.router.navigate(['recipe-card-single', { id: id }]);
 }
 
 
-
-// recipeCardSingle(id: number): void {
-// this.recipe.getRecipesInfo(id.toString()).subscribe((resultatFranAPI) => {
-//   console.log(resultatFranAPI);
-// this.router.navigate(['recipe-card-single', { id: id }]);
-// })
-
-// }

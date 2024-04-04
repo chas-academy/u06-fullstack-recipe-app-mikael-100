@@ -22,7 +22,6 @@ import { Recipe } from './interfaces/recipe';
 export class AppComponent {
   title = 'angularR';
 
-  // recipes: any[];
 
 // Denna styr över Hamburgermenu och gör så att den triggar cssklassen hidden när den är false vilket betyder att den inte kommer att synas.
   menuValue: boolean = false;
@@ -36,7 +35,6 @@ openMenu(){
 
 // auth service Login
 
-loginDetails: LoginDetails;
 
 user: User;
 
@@ -49,14 +47,12 @@ arHenInloggad: boolean = false;
 
 constructor(private auth: AuthService, private recipe: RecipeService, private router: Router) {
 
+  // this.name; "";
+
 this.auth.inloggad.subscribe((inloggad: boolean) => {
   this.arHenInloggad = inloggad;
 })
 
-  this.loginDetails = {
-    email:"seb@seb.seb",
-    password:"sebsebseb"
-  }
 
   this.user = {
     id:-1,
@@ -64,18 +60,7 @@ this.auth.inloggad.subscribe((inloggad: boolean) => {
     email:""
   }
 
-  auth.loginUser(this.loginDetails);
-
-
- 
-
-
 }
-
-
-
-
-
 
 
 getUser(){
@@ -94,6 +79,8 @@ logout()  {
 
 
 
+
+
 }
 
 
@@ -121,29 +108,3 @@ logout()  {
 
 
 
-
-
-
-
-  // Skapa register här under!
-
-  // this.registerDetails = {
-  //   name:"",
-  //   email:"", 
-  //   password:"", 
-  //   password_cornfirmation:"",
-    
-  // }
-
-
-// Register:
-// Skapa en ny registerdetail variabel som använder interface variabel
-// använd construktorn och gör test datan för variabeln.
-// 
-
-// register(){
-//   this.auth.registerUser(this.registerDetails).subscribe((resultat: any) => {
-//     console.log(resultat[0]);
-//     this.user = resultat[0];
-//   })
-// }

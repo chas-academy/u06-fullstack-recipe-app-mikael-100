@@ -1,15 +1,12 @@
-@for (recipe of recipes; track recipes) {
-<!-- <h1>{{title}}</h1> -->
-<img src="{{recipe.image}}">
-<p>{{recipe.summary}}</p>
-<!-- <p>{{readyInMinutes}}</p> -->
-}
-
-<!-- <h1>FUNKAR</h1> -->
-
-<!-- this.recipeCardSingleInterface = {
-title: "",
-image: "",
-summary: "",
-readyInMinutes: 0,
-}; -->
+<div class="w-full md:w-1/2 lg:w-2/3 xl:w-3/4 mx-auto bg-white p-8 shadow text-black p-4">
+    <div class="w-full md:w-full">
+        <img src="{{recipeCardSingleInterface.image}}" class="mx-auto">
+        <p></p>
+        <article [innerHTML]="recipeCardSingleInterface.summary" class="mt-6 mx-auto"></article>
+        <div class="w-full mx-auto flex items-center justify-center border-5 border-red bg-red">
+            <p class="text-xl font-bold p-10 border-5 bg-red mt-6 mb-6">
+                Cooking time {{recipeCardSingleInterface.readyInMinutes}} min
+            </p>
+        </div>
+    </div>
+</div>

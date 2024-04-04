@@ -20,13 +20,13 @@ export class RegisterComponent {
 // FormGroup Register
 
 form = new FormGroup({
-  name: new FormControl('', [Validators.required]),
+  name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
   email: new FormControl('', [Validators.required, Validators.email]),
-  password: new FormControl('', [Validators.required]),
-  password_confirmation: new FormControl('', [Validators.required])
+  password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+  password_confirmation: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
 })
 
-// Register 
+// Register  
 
 registerDetails: RegisterDetails;
 
@@ -43,10 +43,18 @@ constructor(private auth: AuthService) {
 
 
 
-register(){
-  this.auth.registerUser(this.form.value)
-}
 
+
+register(){
+  this.registerDetails = {
+    name: this.form.value.name || "",
+    email: this.form.value.email || "",
+    password: this.form.value.password || "",
+    password_confirmation: this.form.value.password_confirmation || "",
+    
+  }
+  this.auth.registerUser(this.registerDetails);
+}
 
 
 }

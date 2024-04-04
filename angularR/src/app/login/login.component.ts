@@ -23,7 +23,7 @@ loginDetails: LoginDetails;
 
 loginForm = new FormGroup({
   email: new FormControl('', [Validators.required, Validators.email]),
-  password: new FormControl('', [Validators.required]),
+  password: new FormControl('', [Validators.required,Validators.minLength(8), Validators.maxLength(30)]),
 })
 
 
@@ -36,51 +36,14 @@ loginForm = new FormGroup({
     }
   }
 
-  // Funktion som är bundet till Click som skickar FormGroup till AuthService
 
-  login() {
-    const loginDetails: Partial<LoginDetails> = {
-        email: this.loginForm.value.email || '', // Om värdet är null eller undefined, använd en tom sträng istället
-        password: this.loginForm.value.password || '' // Samma här
-    };
-    this.auth.loginUser(loginDetails);
-}
+login() {
+    this.loginDetails = {
+      email: this.loginForm.value.email || "",
+      password: this.loginForm.value.password || "",
+    }
+    this.auth.loginUser(this.loginDetails);
+  }
 
-
-
-
-
-
-// ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ
-
-// Varför fungerar inte denna??????
-
-// FormGroup
-
-// loginForm = new FormGroup({
-//   email: new FormControl<string>(''),
-//   password: new FormControl<string>(''),
-// })
-
-// loginForm = new FormGroup<LoginDetails>({
-//     email: new FormControl<string>(''),
-//   password: new FormControl<string>(''),
-
-// })
-  
-
-//  constructor(private auth: AuthService) { 
-//     this.loginDetails = {
-//       email:"",
-//       password:"",
-//     }
-//   }
-
-
-
-// login(){
-//     this.auth.loginUser(this.loginForm.value)
-
-//   }
 
 }

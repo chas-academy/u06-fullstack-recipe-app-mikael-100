@@ -1,3 +1,25 @@
+Intro
+
+Det första som kommer hända när du kommer till denna sida är att du kommer till välkomssidan. För att kunna göra något på sidan måste du registrera dig som användare och sedan logga in. När du har loggat in kan du gå till ```Sök Recept``` för att kunna få tillgång till searchbaren och kunna söka efter recept. Nör du har skrivit ett sökord och gjort andra val måste du trycka ENTER för att trigga sökningen.
+
+bakgrund
+
+För att veta hur många komponenter jag skulle behöva göra och få ett grepp runt projektet så satte jag mig ner och kollade på sidor där man kunde söka recept. Jag fastnade vid Ica.s och bestämde mig för att utforma min app åt det hållet. Jag började då att göra en simpel Figma för att få koll på vad som behövde skapas. Första veckan av detta projekt satte jag mig ner och gjorde componenterna som skulle behövas enligt figman och gjorde även en grund styling på dessa som gick efter Ica:s färgsättning och styling.
+
+Figma:
+
+https://www.figma.com/file/DU6MjNofPbyV33kRecPxyj/u06?type=design&node-id=0-1&mode=design&t=pxx7v065xVUE95j7-0
+
+
+
+Kod Dokumentation:
+
+Nedan så följer dokumentation för min kod. Jag tyckte att det såg väldigt plottrigt ut att ha denna dokumentation i min kod så jag valde att markera upp med nummer och rubrik i koden och gjorde sedan själva förklaringen av koden i detta dokument med bilder (Prisa Tearihandboken ;).
+
+
+
+
+
 1. Hamburgermenu
 
 För att hamburgermenu så tog jag inspiration av förra uppgiften då jag såg att breeze hade två plika ul listor. En för navbaren med sidorna och en annan för hamburger menu. Jag gjorde så att jag hidade dom länkarna som var uppe i navbaren i mobil läge och valde då istället att visa min andra ul lista som då är vertikal. Jag använde mig sedan av ngClass för att ngClass för att göra trigga cssklasser på diven som ul listan ligger i. ```[ngClass]="{ 'hidden': !menuValue}" [class.mobile_menu]="menuValue"``` denna syftar till att om värdet menuValue är false kommer listan inte att synas. i min app.ts komponent är en variabel satt till boolean false ```menuValue: boolean = false;``` vilket gör att variabeln i default läge är false och listan kommer inte synas. Jag gjorden en funktion:
@@ -17,7 +39,7 @@ För att sedan få bort menu när man klickas på rätt sida så la jag även ``
 Jag fick problem med att ul listan i navbaren syntes i mobil läge så jag fick lägga till ```hidden md:block``` För att helt dölja navbaren i mobiltläge. Denna kod i tailwind gör så att i md storlek och uppåt syns navbaren och länkarna med i allt under md så är den hidden och dåld i vyn.
 
 
-2. FormGroup Register
+2. FormGroup Register / Registrera
 
 För att kunna skicka form till backend så implementerade jag FormsModule, CommonModule, ReactiveFormsModule i register.components.ts sedan så fick jag göra en NEW formGroup som heter form och binda varje nyckel till ett värde från formuläret. 
 
@@ -96,7 +118,7 @@ Dollar tecknet heter templete literals och kallas även templete strings Och anv
 
 5. Register
 
-För att direigera visare användaren till login efter den har regisrerat sig som användare och den begäran har gått igenom så använde jag mig av klassen Router.
+För att dirrigera användaren till login efter den har regisrerat sig som användare och den begäran har gått igenom så använde jag mig av klassen Router.
 För att kunna använda mig av denna i auth.service så var jag tvungen att injecsera denna i construktorn i auth.service.
 
 ![alt text](<Mikael README BILDER/image9.png>)
@@ -105,7 +127,9 @@ efter att jag tagin in den classen så lade jag in denna funktion i min register
 
 ![alt text](<Mikael README BILDER/image10.png>)
 
-Jag använde mig även av denna för att dirigera vidare användaren från login.
+Jag använde mig även av denna för att dirrigera vidare användaren till login.
+
+
 
 
 
@@ -134,4 +158,66 @@ Jag gjorde tidigare en behavior subject i auth.service som jag nu valde att subs
 
 Efter detta så använder jag mig av ```@for(arHenInLoggad){}``` i min html och använder ett utroppstecken om det är false och personen inte är inloggad ```@for(!arHenInLoggad){}``` och då betyder det att dessa inte visas för användaren. Jag sätter de andra värdena i navbar och menu utan utropstecken när användaren är inloggad och då kan du se länkarna.
 
+
+8. InnerHTML
+
+När jag skulle displaya Summary från Arrayen som kom från API som kom texten med html taggar som detta  ```<b>gluten free</b> recipe you've been looking for. This hor d'oeuvre has <b>121 calories</b>, <b>19g of protein</b>``` 
+när jag försökte displaya texten på detta sätt ```{{recipeCardSingleInterface.summary}}```
+
+För att kunna displaya texten på rätt sätt och att html taggarna ska fungera så var jag tvungen att göra det på detta sättet ```<div [innerHTML]="recipeCardSingleInterface.summary"></div>``` 
+
+
+
+
+
+
+
+
+9. Inloggad User
+
+Jag började med att gå in i auth.service och lägga till name i localstorage på loginUser funktionen där. Detta kommer göra att name också hamnar i loclastorage precis som token.
+
+![alt text](<Mikael README BILDER/image17.png>)
+
+Sedan så gick jag till min startsida.component.ts och skapade en variabel name som har typen string eller null. Jag satte även in denna variabel i constructorn.
+
+efter de så skapade jag en funktion som på ngOnInit altså när komponenten skapas hämtar name från localstorage och sedan gör om den till stora bokstäver och sparar den i variabel name.
+
+![alt text](<Mikael README BILDER/image18.png>)
+
+jag injectade sedan Authservice i min konstruktor och gjorde en subscrivtion på inloggad om knöt det värdet till arHenInloggad. Jag tog även och satte in denna variabel över constructorn med defaultvärde false.
+
+![alt text](<Mikael README BILDER/image19.png>)
+
+Jag gick nu över till min startsida html fil och gjorde en @if där jag satte in arhenInloggad och satte name inom måsvingar. Så när användaren loggar in så kommer denna visas med namet från localstorage.
+
+![alt text](<Mikael README BILDER/image20.png>)
+
+
+
+
+10. Login
+
+För att binda datan man skriver in på email och lösenord i html i login.component använde jag mig av formGroup som jag satte i form taggen och döpte denna till loginForm.
+
+![alt text](<Mikael README BILDER/image14.png>)
+
+Sedan använde jag mig av formControlName på inputsen i email och lösenord. Detta kommer göra att det värdet som skrivs in i dessa kommer bindas till ```formControlName="password"``` password och login.
+
+![alt text](<Mikael README BILDER/image15.png>)
+
+För att sedan få dessa värden till min ts fil var jag tvungen att skapa en ``` new FormGroup``` som har namnet loginForm. Namnet på formgrupen i min html som där heter loginForm måste matcha namnet på new FormGroup som jag har i min ts fil för att de ska bindas. Efter de så skrivar jag email och password och sedan new formcontrol och ger även dessa validatorn för att säkra att användaren skriver in data och vilken typ av data.
+
+![alt text](<Mikael README BILDER/image16.png>)
+
+I min login.component.ts så använder jag mig av mitt imporetade interface av loginDetail för att sätta typ på loginform email och password och sedan så stegar jag in med this. i mit injecerade Authservice för att kunna skicka this.loginDetails till funktionen loginUser.
+
+
+11. Logout
+
+Jag började med att sätta en funktion på logga ut knappen i navbar och hamburgermenu som heter logout() när användaren klickar på denna så triggar denna funktion som ligger i ts filen funktionen i AuthService.
+
+![alt text](<Mikael README BILDER/image21.png>)
+
+I auth service så hämtas token från localstorage och binds till token. Eftder det så skickas enapi request till  base url plus en logout som triggar constrollern i laravel och användaren loggas ut.
 

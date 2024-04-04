@@ -26,23 +26,25 @@ export class RecipeCardSingleComponent {
     summary: "",
     readyInMinutes: 0,
     };
-
-    
-
   }
 
-
+// 8. InnerHTML
 
 ngOnInit(): void {
   // Hämta id-parametern från den aktuella routen
   const idFranRecipeComponent = this.route.snapshot.paramMap.get('id');
-
   if (idFranRecipeComponent !== null) {
     // Logga id-parametern till konsolen
     console.log(idFranRecipeComponent);
-
     this.recipe.getRecipesInfo(idFranRecipeComponent).subscribe((resultatFranApi) => {
       console.log("Du klaraa det din nisse", resultatFranApi);
+      this.recipeCardSingleInterface = {
+        title: resultatFranApi.title,
+        image: resultatFranApi.image,
+        summary: resultatFranApi.summary,
+        readyInMinutes: resultatFranApi.readyInMinutes,
+      }
+
 
       // Skapa en array med resultatFranApi som enda element
       this.recipes = [resultatFranApi];

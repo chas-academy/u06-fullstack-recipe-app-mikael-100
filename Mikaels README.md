@@ -60,7 +60,21 @@ Jag lade även in ```FormControl('', [Validators.required])``` på alla rader f�
 
 3. BehaviorSubject
 
-För att lösa AuthGuard så gjorde jag en behaviorSubject av inloggad. BehaviorSubject funkar så att jag kan sätta ett defoultvärde på variabel som i detta fallet är en boolean som i default är false. Jag gjorde sedan så att jag satte in next i login ```this.inloggad.next(true);``` Next fungerar så att den uppdaterar behaviorSubject värde och alla som subscribar på den. När någon loggar in så kommer värdet på BS att bli true. Föra att få in detta värde till min AuthGuard så var jag tvungen att injecta inloggad. Sedan så satte jag denna variabel på returnen på authGuard som då kommer retunera true eller false ```  return inject(AuthService).inloggad.getValue()```
+För att lösa AuthGuard så gjorde jag en behaviorSubject av inloggad. 
+
+![alt text](<Mikael README BILDER/image22.png>)
+
+BehaviorSubject funkar så att jag kan sätta ett defoultvärde på variabel som i detta fallet är en boolean som i default är false. Jag gjorde sedan så att jag satte in next i login ```this.inloggad.next(true);``` 
+
+
+![alt text](<Mikael README BILDER/image23.png>)
+
+
+Next fungerar så att den uppdaterar behaviorSubject värde och alla som subscribar på den. När någon loggar in så kommer värdet på BS att bli true. Föra att få in detta värde till min AuthGuard så var jag tvungen att injecta inloggad. 
+Sedan så satte jag denna variabel på returnen på authGuard som då kommer retunera true eller false ```  return inject(AuthService).inloggad.getValue()```
+
+
+![alt text](<Mikael README BILDER/image24.png>)
 Genom att sedan sätta en next på logout som ger värdet false till BS så kommer authGuarden att uppdateras med det värdet när man loggar ut med.
 
 

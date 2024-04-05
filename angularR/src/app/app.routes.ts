@@ -16,6 +16,6 @@ export const routes: Routes = [
     {path: 'min-lista', component: MinListaComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'recipe-card', component: RecipeCardComponent, canActivate: [authguardGuard] },
-    {path: 'recipe-card-single', component: RecipeCardSingleComponent},
+    {path: 'recipe-card-single', component: RecipeCardSingleComponent, canActivate: [authguardGuard]},
 
 ];

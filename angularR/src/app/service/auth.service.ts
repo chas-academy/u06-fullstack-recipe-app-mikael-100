@@ -20,7 +20,10 @@ inloggad = new BehaviorSubject<boolean>(false);
 
 // Detta är webbadressen som skickar get och post till api
 
-private baseUrl = 'http://127.0.0.1:8000/api/';
+// private baseUrl = 'http://127.0.0.1:8000/api/';
+
+private baseUrl = 'https://u06-fullstack-recipe-app-mikael-100.onrender.com/api/';
+
 
 // private baseUrl ='https://u06-fullstack-recipe-app-mikael-100.vercel.app/api/'
   
